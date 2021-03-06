@@ -6,10 +6,11 @@ const modalImgRef = document.querySelector('.lightbox__image')
 const closeModalRef = document.querySelector('.lightbox__button')
 
 const galleryRef = images.map(({ preview, original, description }) => {
-    return `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${original}" data-source="${preview}" alt="${description}></a></li>`
-}).join('')
+    return `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${original}" data-source="${preview}" alt="${description}"/></a></li>`;
+}).join("")
+    
 
-ulRef.insertAdjacentHTML('afterbegin', galleryRef)
+ulRef.insertAdjacentHTML('beforeend', galleryRef)
 
 // Open/Close function
 
