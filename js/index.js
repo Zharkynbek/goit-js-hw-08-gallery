@@ -5,12 +5,11 @@ const modalOpenRef = document.querySelector('.js-lightbox')
 const modalImgRef = document.querySelector('.lightbox__image')
 const closeModalRef = document.querySelector('.lightbox__button')
 
-const galleryRef = images.map(({ original, description }) => {
-    
-    return `<li class="gallery__item"><a class="gallery__link"><img class="gallery__image" src="${original}" alt="${description}></a></li>`
-})
+const galleryRef = images.map(({ preview, original, description }) => {
+    return `<li class="gallery__item"><a class="gallery__link" href="${original}"><img class="gallery__image" src="${original}" data-source="${preview}" alt="${description}></a></li>`
+}).join('')
 
-ulRef.insertAdjacentHTML('beforeend', galleryRef)
+ulRef.insertAdjacentHTML('afterbegin', galleryRef)
 
 // Open/Close function
 
@@ -22,14 +21,15 @@ window.addEventListener('keyup', onCloseModalRef)
 
 // Open Modal
 
-function onOpenModal(e) {
-    if (e.target.tagName === 'IMG') {
+function onOpenModal(ev) {
+    ev.preventDefault();
+    if (ev.target.tagName === 'IMG') {
         modalOpenRef.classList.add('is-open')
-        modalImgRef.src = e.target.src
-        modalImgRef.alt = e.target.alt
+        modalImgRef.src = ev.target.src
+        modalImgRef.alt = ev.target.alt
     }   
 }
-// Close with Click on Image
+// Close with Click on X
 
 function onCloseModal() {
      modalOpenRef.classList.remove('is-open')
